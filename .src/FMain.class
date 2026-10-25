@@ -1,0 +1,112 @@
+' Gambas class file
+
+' Copyright (C) 2024-2026 Murilo Gomes <profmugomes.com.br>
+' SPDX-License-Identifier: GPL-2.0-only
+
+' Site: https://www.profmugomes.com.br
+
+Private Function GerarChave() As String
+  
+  Dim lmin As String = "abcdefghijklmnopqrstuvwxyz"
+  Dim lmai As String = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  Dim num As String = "1234567890"
+  
+  Dim retorno As String = ""
+  Dim caracteres As String = ""
+  
+  caracteres &= lmin
+  caracteres &= lmai
+  caracteres &= num
+  
+  Dim len As Integer = Len(caracteres)
+  
+  Dim segmento As Integer = txtSegmentos.Value
+  Dim tamanho As Integer = txtTamanho.Value
+  
+  Dim a As Integer = 0
+  Dim n As Integer = 0
+  
+  Dim rand As Integer
+  
+  Do While a <= tamanho
+    n = 0
+    Do While n <= segmento
+      rand = Rand(1, len)
+      retorno &= caracteres[rand - 1]
+      Inc n
+      If n = segmento Then Break
+    Loop
+    retorno &= "-"
+    Inc a
+    If a = tamanho Then Break
+  Loop
+  
+  retorno = Left(retorno, Len(retorno) - 1)
+  Return retorno
+  
+End
+
+Public Sub Form_Open()
+
+  txtSegmentos.Value = 5
+  txtTamanho.Value = 5  
+
+End
+
+Public Sub btnCopiar1_Click()
+  
+  Clipboard.Copy(txtKey.Text)
+  
+End
+
+Public Sub btnGerar_Click()
+  
+  Dim sKey As String
+  
+  If txtSegmentos.Value <= 0 Then 
+    txtSegmentos.Value = 1
+  Endif
+  
+  If txtTamanho.Value <= 0 Then 
+    txtTamanho.Value = 1
+  Endif
+  
+  btnGerar.Enabled = False
+  
+  txtKey.Text = "Generating..."
+  
+  Wait 0.5
+  
+  sKey = GerarChave()
+  
+  txtKey.Text = sKey
+  
+  btnGerar.Enabled = True
+  mnuSave.Enabled = True
+End
+
+Public Sub mnuSave_Click()
+  Dim txt As String = Subst(("Key: &1"), txtKey.Text) & gb.NewLine
+  
+  Dialog.Title = ("Save File")
+  Dialog.Filter = ["*.txt", ("Text File")]
+  
+  If Dialog.SaveFile() = False Then 
+    File.Save(Dialog.Path, txt)
+  Endif
+
+End
+
+Public Sub mnuClose_Click()
+
+  Quit
+
+End
+
+Public Sub mnuApoie_Click()
+
+  Dim sTerm As String = ""
+  
+  Shell "xdg-open \"https://github.com/sponsors/profmugomes\"" To sTerm
+
+End

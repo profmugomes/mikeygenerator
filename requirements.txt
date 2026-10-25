@@ -1,2 +1,0 @@
-# Dependências de runtime do MiKeyGenerator
-ttkbootstrap>=2.0.0

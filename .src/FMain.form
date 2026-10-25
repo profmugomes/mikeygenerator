@@ -1,0 +1,67 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,64,42)
+  Font = Font["12"]
+  Text = ("MiKeyGenerator")
+  Icon = Picture["mikeygenerator.png"]
+  Resizable = False
+  { Menu1 Menu
+    Text = ("File")
+    { mnuSave Menu
+      Text = ("Save")
+      Enabled = False
+      Shortcut = "Ctrl+S"
+    }
+    { Menu3 Menu
+    }
+    { mnuClose Menu
+      Text = ("Quit")
+      Shortcut = "Alt+F4"
+    }
+  }
+  { Menu2 Menu
+    Text = ("About")
+    { mnuApoie Menu
+      Text = ("Support MiKeyGenerator")
+    }
+    { Menu5 Menu
+    }
+    { mnuSobre Menu
+      Text = ("About MiKeyGenerator")
+    }
+  }
+  { Label1 Label
+    MoveScaled(1,1,31,4)
+    Font = Font["Bold"]
+    Text = ("Segment Size")
+  }
+  { txtSegmentos ValueBox
+    MoveScaled(1,5,12,4)
+  }
+  { txtTamanho ValueBox
+    MoveScaled(1,14,12,4)
+  }
+  { Label2 Label
+    MoveScaled(1,10,31,4)
+    Font = Font["Bold"]
+    Text = ("Key Size")
+  }
+  { btnGerar Button
+    MoveScaled(22,20,20,5)
+    Text = ("Generate")
+  }
+  { Label4 Label
+    MoveScaled(1,27,31,4)
+    Font = Font["Bold"]
+    Text = ("Activation Key")
+  }
+  { txtKey TextBox
+    MoveScaled(1,32,50,5)
+    ReadOnly = True
+  }
+  { btnCopiar1 Button
+    MoveScaled(52,32,11,5)
+    Text = ("Copy")
+  }
+}
